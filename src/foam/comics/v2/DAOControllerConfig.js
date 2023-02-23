@@ -13,6 +13,10 @@ foam.CLASS({
   `,
   implements: [ 'foam.mlang.Expressions' ],
 
+  imports: [
+    'ctrl'
+  ],
+
   requires: [
     'foam.comics.SearchMode',
     'foam.comics.v2.CannedQuery',
@@ -64,7 +68,7 @@ foam.CLASS({
       name: 'dao',
       hidden: true,
       expression: function(daoKey, predicate) {
-        var dao = this.__context__[daoKey] || foam.dao.NullDAO.create({of: foam.core.FObject});
+        var dao = this.ctrl.__subContext__[daoKey] || foam.dao.NullDAO.create({of: foam.core.FObject});
         if ( this.hasOwnProperty('of') ) {
           dao = foam.dao.ProxyDAO.create({
             of: this.of,
